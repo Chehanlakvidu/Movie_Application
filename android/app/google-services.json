@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "134274675411",
+    "project_id": "fir-b1d28",
+    "storage_bucket": "fir-b1d28.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134274675411:android:b3e2bf1a673a5ab3849a26",
+        "android_client_info": {
+          "package_name": "com.example.movie_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCSVxnz2m6gpVuUww7_x9p3Mgrpi4cD6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
