@@ -31,15 +31,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   // Example categories
-  final List<String> categories = ['Top Rated', 'New Releases', 'Popular'];
+  final List<String> categories = ['Top Rated', 'New Releases', 'Popular','What''s on TV tonight'];
 
   // This would be your API data
-  final Map<String, List<String>> movies = {
-    'Top Rated': ['Movie 1', 'Movie 2', 'Movie 3'],
-    'New Releases': ['Movie A', 'Movie B', 'Movie C'],
-    'Popular': ['Film X', 'Film Y', 'Film Z'],
-  };
-
+  final int movies = 10; 
   Widget _buildMovieCategory(String category) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
           height: 200, // Adjust height to fit your content
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: movies[category]?.length ?? 0,
+            itemCount: movies,
             itemBuilder: (context, index) {
               // Replace with a widget that displays the movie data
               return Card(
@@ -69,21 +64,42 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF00000F), // Set the whole background to deep blue
       appBar: AppBar(
-        title: Text(widget.title),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset(
+            'assets/horizontal1_logo.png',
+            height: 200,
+            width: 200,
+          ),
+        ),
         actions: [
           IconButton(icon: const Icon(Icons.search), onPressed: () {}),
           IconButton(icon: const Icon(Icons.person), onPressed: () {}),
         ],
+        backgroundColor: Color(0xFF00000F),
       ),
       body: ListView(
         children: <Widget>[
-          // Search bar at the top
           Padding(
             padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'Discover The Perfect Film\nWith An Effortless Search And Selection',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: TextField(
               decoration: InputDecoration(
                 hintText: 'Search for movies, shows, genres, etc.',
