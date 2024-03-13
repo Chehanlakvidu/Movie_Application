@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:movie_application/api/api.dart';
+import 'package:movie_application/movie/movie.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+
 
 class MyApp extends StatelessWidget {
+
   const MyApp({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +23,25 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+
+
   final String title;
 
   const MyHomePage({Key? key, required this.title}) : super(key: key);
-
+  
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 } 
 
+
 class _MyHomePageState extends State<MyHomePage> {
+
+
+late Future<List<Movie>> trendingMovies;
+void initstate(){
+  super.initState();
+  trendingMovies = Api().getTrendingMovies as Future<List<Movie>>;
+}
   // Example categories
   final List<String> categories = ['Top Rated', 'New Releases', 'Popular','What''s on TV tonight'];
 
