@@ -3,11 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_application/api/api.dart';
-import 'package:movie_application/detailscreen.dart';
 import 'package:movie_application/movie/movie.dart';
 import 'package:movie_application/searchresultscreen.dart';
 import 'package:movie_application/widgets/movies_slider.dart';
-import 'package:movie_application/widgets/slider.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
