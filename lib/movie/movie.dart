@@ -19,15 +19,32 @@ Movie({
 });
 
 
-  factory Movie.fromJson(Map<String, dynamic> json) {
-    return Movie(
-      title: json["title"],
-      backDropPath: json["backdrop_path"],
-      originalTitle: json["original_title"],
-      overview: json["overview"],
-      posterPath: json["poster_path"],
-      releaseDate: json["release_date"],
-      voteAverage: json["vote_average"].toDouble(),
-    );
+factory Movie.fromJson(Map<String, dynamic> json) {
+  return Movie(
+    title: json["title"] ?? 'No title', // Provide a default value
+    backDropPath: json["backdrop_path"] ?? '', // Assume empty string if null
+    originalTitle: json["original_title"] ?? 'No original title',
+    overview: json["overview"] ?? 'No overview',
+    posterPath: json["poster_path"] ?? '',
+    releaseDate: json["release_date"] ?? 'No release date',
+    voteAverage: (json["vote_average"] ?? 0).toDouble(),
+  );
 }
+
+}
+class Person {
+  final int id;
+  final String name;
+
+  Person({
+    required this.id,
+    required this.name,
+  });
+
+  factory Person.fromJson(Map<String, dynamic> json) {
+    return Person(
+      id: json['id'],
+      name: json['name'],
+    );
+  }
 }

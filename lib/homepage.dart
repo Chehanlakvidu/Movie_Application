@@ -1,7 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_application/api/api.dart';
+import 'package:movie_application/detailscreen.dart';
 import 'package:movie_application/movie/movie.dart';
+import 'package:movie_application/searchresultscreen.dart';
 import 'package:movie_application/widgets/movies_slider.dart';
 import 'package:movie_application/widgets/slider.dart';
 
@@ -34,6 +38,12 @@ class _MyHomePageState extends State<MyHomePage> {
   late Future<List<Movie>> trendingMovies;
   late Future<List<Movie>> topRatedMovies;
   late Future<List<Movie>> upcomingMovies;
+  late Future<List<Movie>> oncinema;
+  TextEditingController searchController = TextEditingController(); // Add this line
+
+
+  String currentSearchType = 'movie'; // or 'actor'
+  final List<String> searchTypes = ['movie', 'actor'];
 
   @override
   void initState() {
@@ -41,6 +51,21 @@ class _MyHomePageState extends State<MyHomePage> {
     trendingMovies = Api().getTrendingMovies();
     topRatedMovies = Api().getTopRatedMovies();
     upcomingMovies = Api().getUpcomingMovies();
+    oncinema = Api().getwhatsoncinema();
+  }
+  void _search(String query) {
+    // Call a function to update the UI with the search results.
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SearchResultsScreen(query: query, searchType: currentSearchType),
+      ),
+    );
+  }
+ void _updateSearchType(String type) {
+    setState(() {
+      currentSearchType = type;
+    });
   }
 
   Widget _buildSection(String title, Future<List<Movie>> moviesFuture) {
@@ -84,36 +109,58 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image.asset(
-            'assets/horizontal1_logo.png',
-            height: 200,
-            width: 200,
-          ),
+          
         ),
         actions: [
-          IconButton(icon: const Icon(Icons.search), onPressed: () {}),
           IconButton(icon: const Icon(Icons.person), onPressed: () {}),
         ],
         backgroundColor: const Color(0xFF00000F),
       ),
-      body: SingleChildScrollView(
+ body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search for movies, shows, genres, etc.',
-                  prefixIcon: const Icon(Icons.search),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
-                  filled: true,
-                  fillColor: Colors.white,
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: TextField(
+                    controller: searchController,
+                    onSubmitted: _search,
+                    decoration: InputDecoration(
+                      hintText: 'Search for movies, shows, genres, etc.',
+                      prefixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
+                  ),
                 ),
-              ),
+                DropdownButton<String>(
+                  value: currentSearchType,
+                  icon: Icon(Icons.arrow_downward),
+                  elevation: 16,
+                  style: TextStyle(color: Colors.deepPurple),
+                  underline: Container(
+                    height: 2,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                  onChanged: (String? newValue) {
+                    _updateSearchType(newValue!);
+                  },
+                  items: searchTypes.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                )
+              ],
             ),
+
+            
             _buildSection('Trending Movies', trendingMovies),
             _buildSection('Top Rated Movies', topRatedMovies),
             _buildSection('Upcoming Movies', upcomingMovies),
+             _buildSection('On Cinema ', oncinema),
           ],
         ),
       ),

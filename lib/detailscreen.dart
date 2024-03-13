@@ -44,17 +44,28 @@ class DetailsScreen extends StatelessWidget {
             ),
           ),
           SliverToBoxAdapter(
+            
             child: Padding(
               padding: const EdgeInsets.all(12),
               child: Column(
-                // crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Add the title here
+                  Text(
+                    movie.title,
+                    style: GoogleFonts.openSans(
+                      fontSize: 24, // Choose an appropriate size
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 8), // Spacing between title and overview heading
                   Text(
                     'Overview',
                     style: GoogleFonts.openSans(
                       fontSize: 30,
                       fontWeight: FontWeight.w800,
-                       color:  Color(0xFFFEAC02),
+                      color: Color(0xFFFEAC02),
                     ),
                   ),
                   const SizedBox(height: 16),
