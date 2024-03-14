@@ -37,8 +37,7 @@ class Api {
         movies.add(Movie.fromJson(decodedData));
       } else {
         print('Failed to load movie details for movie ID $movieId');
-        // Consider how you want to handle this error.
-        // For simplicity, we're just printing an error message here.
+       
       }
     }
     return movies;
@@ -50,7 +49,7 @@ class Api {
       '&language=en-US'
       '&page=1'
       '&include_adult=false'
-      '&query=${Uri.encodeComponent(query)}'; // Ensure the query is properly encoded
+      '&query=${Uri.encodeComponent(query)}'; 
 
   final response = await http.get(Uri.parse(searchUrl));
 
@@ -120,10 +119,10 @@ class Api {
       if (searchResults['results'].isEmpty) {
         return []; // Return an empty list if no actors were found
       }
-      // Assuming you're interested in the first actor found
+      
       var actorId = searchResults['results'][0]['id'];
 
-      return getMoviesByPersonId(actorId); // Call another method to get the actor's movies
+      return getMoviesByPersonId(actorId); 
     } else {
       throw Exception('Failed to search for actor');
     }

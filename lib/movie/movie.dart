@@ -25,8 +25,8 @@ Movie({
 factory Movie.fromJson(Map<String, dynamic> json) {
   return Movie(
       id: json['id'],
-    title: json["title"] ?? 'No title', // Provide a default value
-    backDropPath: json["backdrop_path"] ?? '', // Assume empty string if null
+    title: json["title"] ?? 'No title', 
+    backDropPath: json["backdrop_path"] ?? '', 
     originalTitle: json["original_title"] ?? 'No original title',
     overview: json["overview"] ?? 'No overview',
     posterPath: json["poster_path"] ?? '',

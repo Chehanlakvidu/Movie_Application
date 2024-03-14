@@ -12,7 +12,7 @@ class SplashScreen extends StatelessWidget {
     return AnimatedSplashScreen(
       splash: Center(
         child: Image.asset(
-          'assets/logo.png', // Your logo asset path
+          'assets/logo.png', 
         ),
       ),
       duration: 3000,

@@ -11,15 +11,15 @@ class MoviesSlider extends StatelessWidget {
   const MoviesSlider({
     super.key,
     required this.snapshot,
-        required this.onAddToWatchList, // Add this line
-    required this.isInWatchList, // Add this line to check if movie is in watch list
-    required this.onRemoveFromWatchList, // Add this line
+        required this.onAddToWatchList, 
+    required this.isInWatchList, 
+    required this.onRemoveFromWatchList,
 
   });
-  final AsyncSnapshot<List<Movie>> snapshot; // Update this line to specify the data type
-  final Function(int) onAddToWatchList; // Add this line
-  final bool Function(int) isInWatchList; // Add this line to check if movie is in watch list
-  final Function(int) onRemoveFromWatchList; // Add this line for removal callback
+  final AsyncSnapshot<List<Movie>> snapshot; 
+  final Function(int) onAddToWatchList; 
+  final bool Function(int) isInWatchList; 
+  final Function(int) onRemoveFromWatchList; 
 
 
   
@@ -33,8 +33,8 @@ class MoviesSlider extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         itemCount: snapshot.data!.length,
         itemBuilder: (context, index) {
-          final movie = snapshot.data![index]; // Add this line
-          return Stack( // Use Stack to overlay the add button on the movie image
+          final movie = snapshot.data![index]; 
+          return Stack( 
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -44,7 +44,7 @@ class MoviesSlider extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => DetailsScreen(
-                          movie: movie, // Update this line
+                          movie: movie,
                         ),
                       ),
                     );
@@ -55,7 +55,7 @@ class MoviesSlider extends StatelessWidget {
                       height: 200,
                       width: 150,
                       child: Image.network(
-                        '${Constants.imagePath}${movie.posterPath}', // Update this line
+                        '${Constants.imagePath}${movie.posterPath}', 
                         filterQuality: FilterQuality.high,
                         fit: BoxFit.cover,
                       ),
@@ -68,7 +68,7 @@ class MoviesSlider extends StatelessWidget {
                 right: 8,
                 child: IconButton(
                   icon: Icon(Icons.add_circle, color: Colors.white),
-                  onPressed: () => onAddToWatchList(movie.id), // Add this line
+                  onPressed: () => onAddToWatchList(movie.id), 
                 ),
               ),
                Positioned(

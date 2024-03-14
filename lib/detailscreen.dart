@@ -20,7 +20,7 @@ class DetailsScreen extends StatelessWidget {
         slivers: [
           SliverAppBar.large(
             leading: const BackBtn(),
-            backgroundColor: const Color(0xFF00000F), // Set the whole background to deep blue
+            backgroundColor: const Color(0xFF00000F), 
             expandedHeight: 500,
             pinned: true,
             floating: true,
@@ -52,11 +52,11 @@ class DetailsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Add the title here
+                
                   Text(
                     movie.title,
                     style: GoogleFonts.openSans(
-                      fontSize: 24, // Choose an appropriate size
+                      fontSize: 24, 
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),

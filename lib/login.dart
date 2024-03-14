@@ -117,12 +117,12 @@ Future<void> _signIn() async {
   
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF00000F), // Deep blue background color
+      backgroundColor: Color(0xFF00000F), 
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween, // Add space between the main content and the bottom text
+            mainAxisAlignment: MainAxisAlignment.spaceBetween, 
             children: [
               Text(
                 'Welcome!',
@@ -132,7 +132,7 @@ Future<void> _signIn() async {
                   color: Colors.white,
                 ),
               ),
-              SizedBox(height: 60), // Space between 'Welcome!' and input fields
+              SizedBox(height: 60), 
               TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -166,21 +166,21 @@ Future<void> _signIn() async {
                 ),
               ),
             
-              SizedBox(height: 32), // More space between 'Forgot password?' and 'Sign In' button
+              SizedBox(height: 32), 
             ElevatedButton(
   style: ElevatedButton.styleFrom(
-    backgroundColor: Color(0xFFFEAC02), // Amber-like color for the button
+    backgroundColor: Color(0xFFFEAC02),
     padding: EdgeInsets.all(15),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(30),
     ),
   ),
-  onPressed: _signIn, // Call the _signIn method here
+  onPressed: _signIn, 
   child: Text('Sign In', style: TextStyle(fontSize: 18)),
 ),
-              SizedBox(height: 16), // Space between 'Sign In' button and 'Sign in with Google' button
+              SizedBox(height: 16), 
               
-              Spacer(), // Pushes the 'Sign up' text to the bottom
+              Spacer(), 
              TextButton(
   onPressed: () {
     Navigator.push(

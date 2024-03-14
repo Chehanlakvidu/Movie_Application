@@ -38,9 +38,9 @@ class _MyHomePageState extends State<MyHomePage> {
   late Future<List<Movie>> topRatedMovies;
   late Future<List<Movie>> upcomingMovies;
   late Future<List<Movie>> oncinema;
-  TextEditingController searchController = TextEditingController(); // Add this line
-  late Future<List<Movie>> watchListMovies; // Add this line
-  final WatchListManager watchListManager = WatchListManager(); // Add this line
+  TextEditingController searchController = TextEditingController();
+  late Future<List<Movie>> watchListMovies; 
+  final WatchListManager watchListManager = WatchListManager(); 
 
 
 
@@ -71,13 +71,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
    void _fetchWatchListMovies() async {
     final List<int> watchListIds = await watchListManager.getWatchList();
-    // Assuming you have a method in your API class to fetch movies by a list of IDs
+    
     watchListMovies = Api().getMoviesByIds(watchListIds);
     setState(() {}); // Notify the UI that data is ready to be refreshed
   }
    void addToWatchList(int movieId) async {
     await watchListManager.addToWatchList(movieId);
-    // You might want to fetch the updated watch list movies here
+    
     _fetchWatchListMovies();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Added to your Watch List!')),
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   void removeFromWatchList(int movieId) async {
   await watchListManager.removeFromWatchList(movieId);
-  _fetchWatchListMovies(); // Refresh the watch list to reflect changes
+  _fetchWatchListMovies();
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(content: Text('Removed from your Watch List')),
   );
@@ -114,9 +114,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                // Your movie metadata (like rating, release date, etc)
+                
                 Text('Rating: ${movie.voteAverage}'),
-                // Add to watch list button
+                
                 ElevatedButton(
                   onPressed: () => addToWatchList(movie.id),
                   child: Text('Add to Watch List'),
@@ -171,7 +171,7 @@ Widget _buildSection(String title, Future<List<Movie>> moviesFuture) {
               return MoviesSlider(
                 snapshot: snapshot,
                 onAddToWatchList: addToWatchList,
-isInWatchList: (int movieId) => watchListManager.isInWatchList(movieId),
+                isInWatchList: (int movieId) => watchListManager.isInWatchList(movieId),
                 onRemoveFromWatchList: removeFromWatchList,
               );
             } else {

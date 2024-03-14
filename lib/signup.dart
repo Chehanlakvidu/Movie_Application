@@ -97,7 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF00000F), // Deep blue background color
+      backgroundColor: const Color(0xFF00000F), 
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -181,7 +181,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(height: 32.0),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFEAC02), // Amber-like color for the button
+                  backgroundColor: const Color(0xFFFEAC02), 
                   padding: const EdgeInsets.all(15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
