@@ -1,5 +1,6 @@
 class Movie{
   
+  int id;
   String title;
   String backDropPath; 
   String originalTitle;
@@ -9,6 +10,8 @@ class Movie{
   double voteAverage;
 
 Movie({
+
+  required this.id,
   required this.title,
   required this.backDropPath,
   required this.originalTitle,
@@ -21,6 +24,7 @@ Movie({
 
 factory Movie.fromJson(Map<String, dynamic> json) {
   return Movie(
+      id: json['id'],
     title: json["title"] ?? 'No title', // Provide a default value
     backDropPath: json["backdrop_path"] ?? '', // Assume empty string if null
     originalTitle: json["original_title"] ?? 'No original title',

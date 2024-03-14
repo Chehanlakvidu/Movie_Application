@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:movie_application/constant.dart';
 import 'package:movie_application/movie/movie.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 
 class Api {
@@ -18,8 +20,27 @@ class Api {
       'https://api.themoviedb.org/3/movie/now_playing?api_key=${Constants.apiKey}';
 
 
+  static const _baseUrl = 'https://api.themoviedb.org/3';
+
+  String _movieDetailsUrl(int movieId) => '$_baseUrl/movie/$movieId?api_key=${Constants.apiKey}';
 
 
+
+ Future<List<Movie>> getMoviesByIds(List<int> movieIds) async {
+    List<Movie> movies = [];
+    for (int movieId in movieIds) {
+      final response = await http.get(Uri.parse(_movieDetailsUrl(movieId)));
+      if (response.statusCode == 200) {
+        final decodedData = json.decode(response.body);
+        movies.add(Movie.fromJson(decodedData));
+      } else {
+        print('Failed to load movie details for movie ID $movieId');
+        // Consider how you want to handle this error.
+        // For simplicity, we're just printing an error message here.
+      }
+    }
+    return movies;
+  }
   Future<List<Movie>> getSearchResults(String query) async {
   // Construct the search URL with all necessary query parameters
   final String searchUrl = 'https://api.themoviedb.org/3/search/movie'
@@ -123,3 +144,53 @@ class Api {
   }
 }
 
+class WatchListManager {
+  static const String _watchListKey = 'watchList';
+  List<int> _cachedWatchList = [];
+
+  WatchListManager() {
+    _loadWatchList();
+  }
+
+  // Load the watch list from SharedPreferences
+  Future<void> _loadWatchList() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? watchListJson = prefs.getString(_watchListKey);
+    if (watchListJson != null) {
+      List<dynamic> jsonList = jsonDecode(watchListJson);
+      _cachedWatchList = jsonList.cast<int>();
+    }
+  }
+
+  // Add a movie ID to the watch list
+  Future<void> addToWatchList(int movieId) async {
+    if (!_cachedWatchList.contains(movieId)) {
+      _cachedWatchList.add(movieId);
+      await _saveWatchList();
+    }
+  }
+
+  // Remove a movie ID from the watch list
+  Future<void> removeFromWatchList(int movieId) async {
+    if (_cachedWatchList.remove(movieId)) {
+      await _saveWatchList();
+    }
+  }
+
+  // Save the watch list to SharedPreferences
+  Future<void> _saveWatchList() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String watchListJson = jsonEncode(_cachedWatchList);
+    await prefs.setString(_watchListKey, watchListJson);
+  }
+
+  // Check if a movie ID is in the watch list
+  bool isInWatchList(int movieId) {
+    return _cachedWatchList.contains(movieId);
+  }
+
+  // Get the current watch list
+  List<int> getWatchList() {
+    return _cachedWatchList;
+  }
+}
