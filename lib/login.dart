@@ -77,7 +77,7 @@ Future<void> _signIn() async {
     case 'operation-not-allowed':
       errorMessage = 'Operation not allowed.';
       break;
-    // Add a case for the 'invalid-credential' if you know that is the code
+    // Add a case for the 'invalid-credential'
     // case 'invalid-credential':
     //   errorMessage = 'The supplied auth credential is incorrect or has expired.';
     //   break;
@@ -165,14 +165,7 @@ Future<void> _signIn() async {
                   ),
                 ),
               ),
-              TextButton(
-                onPressed: () {
-                },
-                child: Text(
-                  "Forgot password?",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
+            
               SizedBox(height: 32), // More space between 'Forgot password?' and 'Sign In' button
             ElevatedButton(
   style: ElevatedButton.styleFrom(
@@ -186,13 +179,7 @@ Future<void> _signIn() async {
   child: Text('Sign In', style: TextStyle(fontSize: 18)),
 ),
               SizedBox(height: 16), // Space between 'Sign In' button and 'Sign in with Google' button
-              TextButton.icon(
-                icon: Image.asset('assets/google_logo.png', height: 24.0), // Google logo
-                label: Text('Sign in with Google', style: TextStyle(color: Colors.white)),
-                onPressed: () {
-                  // Handle sign-in with Google
-                },
-              ),
+              
               Spacer(), // Pushes the 'Sign up' text to the bottom
              TextButton(
   onPressed: () {

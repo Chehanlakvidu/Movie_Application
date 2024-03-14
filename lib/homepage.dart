@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously, unused_element, sort_child_properties_last, await_only_futures
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -57,7 +57,6 @@ class _MyHomePageState extends State<MyHomePage> {
     _fetchWatchListMovies();
   }
   void _search(String query) {
-    // Call a function to update the UI with the search results.
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -139,7 +138,7 @@ Widget _buildWatchListSection() {
         return MoviesSlider(
           snapshot: snapshot,
           onAddToWatchList: addToWatchList,
-          isInWatchList: (int movieId) => watchListManager.isInWatchList(movieId), // Implement this method
+          isInWatchList: (int movieId) => watchListManager.isInWatchList(movieId), 
           onRemoveFromWatchList: removeFromWatchList,
         );
       } else {
@@ -282,10 +281,10 @@ Widget buildWatchListSection() {
                   value: currentSearchType,
                   icon: Icon(Icons.arrow_downward),
                   elevation: 16,
-                  style: TextStyle(color: Colors.deepPurple),
+                  style: TextStyle(color: Colors.amber[400]),
                   underline: Container(
                     height: 2,
-                    color: Colors.deepPurpleAccent,
+                    color: Colors.amber[400],
                   ),
                   onChanged: (String? newValue) {
                     _updateSearchType(newValue!);
